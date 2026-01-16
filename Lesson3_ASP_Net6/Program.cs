@@ -1,3 +1,7 @@
+using Lesson3_ASP_Net6.Extentions;
+using Lesson3_ASP_Net6.Middlewares;
+using static System.Net.Mime.MediaTypeNames;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,7 +16,7 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
-app.UseStaticFiles();
+
 
 
 // Custom middleware elave etmek isteyirikse asagidaki yollar ile elave ede bilerik
@@ -95,12 +99,16 @@ app.UseStaticFiles();
 #endregion
 
 
-app.UseRouting();
+#region CustomMiddlewareRegistration
 
-app.UseAuthorization();
+//app.UseMiddleware<LogMiddleware>();
+
+app.UseMiddlewareExtentions();
+
+#endregion
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
