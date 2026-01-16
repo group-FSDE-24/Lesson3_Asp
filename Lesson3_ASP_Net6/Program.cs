@@ -33,25 +33,66 @@ app.UseStaticFiles();
 
 // Example use
 
-app.Use(async (context, next) =>
-{
-    Console.Out.WriteLine("Use middleware-i isledi app1");
-    await next();
-    Console.Out.WriteLine("Use middleware-i sonlandi app1");
-});
+// app.Use(async (context, next) =>
+// {
+//     Console.Out.WriteLine("Use middleware-i isledi app1");
+//     await next();
+//     Console.Out.WriteLine("Use middleware-i sonlandi app1");
+// });
 
-app.Use(async (context, next) =>
-{
-    Console.Out.WriteLine("Use middleware-i isledi app2");
-    await next();
-    Console.Out.WriteLine("Use middleware-i sonlandi app2");
-});
+// app.Use(async (context, next) =>
+// {
+//     Console.Out.WriteLine("Use middleware-i isledi app2");
+//     await next();
+//     Console.Out.WriteLine("Use middleware-i sonlandi app2");
+// });
 
 #endregion
 
+#region RunMiddlewareExample
 
+// app.Run( async (context) =>
+// {
+//     Console.Out.WriteLine("Run middleware-i isledi");
+// });
 
+// // Islemeyecek
+//app.Use(async (context, next) =>
+//{
+//    Console.Out.WriteLine("Use middleware-i isledi app2");
+//    await next();
+//    Console.Out.WriteLine("Use middleware-i sonlandi app2");
+//});
 
+#endregion
+
+#region MapMiddlewareExample
+
+// app.Map("/test", app =>
+// {
+//     app.Use(async (context, next) =>
+//     {
+//         Console.Out.WriteLine("Map middleware-i isledi");
+//         await next();
+//         Console.Out.WriteLine("Map middleware-i sonlandi");
+//     });
+// });
+
+#endregion
+
+#region MapWhenMiddlewareExample
+
+// app.MapWhen(
+//     context => context.Request.Path == "/admin",
+//     adminApp =>
+//     {
+//         adminApp.Run(async context =>
+//         {
+//             await context.Response.WriteAsync("Admin sehifesi");
+//         });
+//     });
+
+#endregion
 
 
 app.UseRouting();
